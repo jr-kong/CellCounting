@@ -21,7 +21,7 @@
   - `--seed`: RNG seed for augmentations (default `42`)
 
 **Train CNN**
-- Run: `python /content/CellCounting/cnn.py --run-name cnn_1`
+- Run: `python /content/CellCounting/cnn.py --run-name cnn_1 --batch-size 32 --epochs 5`
 - Flags:
   - `--metadata`: path to metadata CSV
   - `--root`: root containing the per-sample NPZ files
