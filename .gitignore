@@ -1,0 +1,5 @@
+processed/
+w1_mask/
+w1_images/
+.venv/
+__pycache__/
