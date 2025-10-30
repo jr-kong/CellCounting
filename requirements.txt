@@ -3,6 +3,5 @@ imageio>=2.20
 Pillow>=9.0
 torch>=2.0
 matplotlib>=3.7
-tqdm>=4.60
 scikit-learn>=1.2
 joblib>=1.2

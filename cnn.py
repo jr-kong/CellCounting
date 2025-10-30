@@ -14,7 +14,6 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from tqdm.auto import tqdm
 import torch
 from torch import nn
 from torch.utils.data import DataLoader, Dataset, Subset
@@ -337,8 +336,7 @@ def main() -> None:
     for epoch in range(1, args.epochs + 1):
         model.train()
         epoch_loss = 0.0
-        train_iter = tqdm(train_loader, desc=f"Epoch {epoch:03d} [train]")
-        for images, targets in train_iter:
+        for images, targets in train_loader:
             images = images.to(device)
             targets = targets.to(device)
             optimizer.zero_grad()
@@ -352,13 +350,13 @@ def main() -> None:
         msg = f"Epoch {epoch:03d} - train MSE: {train_mse:.4f}"
 
         if val_loader is not None:
-            val_iter = tqdm(val_loader, desc=f"Epoch {epoch:03d} [val]")
-            val_mse, val_mae = evaluate(model, val_iter, device)
+            val_mse, val_mae = evaluate(model, val_loader, device)
             msg += f", val MSE: {val_mse:.4f}, val MAE: {val_mae:.4f}"
         else:
             val_mse, val_mae = float("nan"), float("nan")
 
-        tqdm.write(msg)
+        percent = (epoch / args.epochs) * 100.0
+        print(f"{percent:6.2f}% | {msg}")
         history.append(
             {
                 "epoch": epoch,

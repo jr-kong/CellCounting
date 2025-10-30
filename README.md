@@ -66,4 +66,3 @@
 - Preprocessing writes `metadata.csv` plus per-sample NPZ files and logs in `processed/`
 - CNN training saves `config.json`, `metrics.csv`, optional `test_metrics.json`, `model.pt`, and `test_scatter.png` under each run folder
 - MLP and Random Forest runs save `config.json`, `metrics.csv`, and `model.joblib` in `experiments_mlp/` and `experiments_rf/`
-- Progress bars (tqdm) appear for train/val epochs; disable by redirecting output or editing the script if desired
