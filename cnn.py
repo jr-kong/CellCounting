@@ -336,7 +336,9 @@ def main() -> None:
     for epoch in range(1, args.epochs + 1):
         model.train()
         epoch_loss = 0.0
-        for images, targets in train_loader:
+        total_steps = len(train_loader)
+        next_print_fraction = 0.1
+        for step_idx, (images, targets) in enumerate(train_loader, 1):
             images = images.to(device)
             targets = targets.to(device)
             optimizer.zero_grad()
@@ -345,6 +347,15 @@ def main() -> None:
             loss.backward()
             optimizer.step()
             epoch_loss += loss.item() * targets.size(0)
+
+            progress = step_idx / total_steps if total_steps else 1.0
+            if progress >= next_print_fraction or step_idx == total_steps:
+                print(
+                    f"Epoch {epoch:03d} | "
+                    f"{progress * 100:6.2f}% of epoch complete "
+                    f"(step {step_idx}/{total_steps})"
+                )
+                next_print_fraction += 0.1
 
         train_mse = epoch_loss / len(train_subset)
         msg = f"Epoch {epoch:03d} - train MSE: {train_mse:.4f}"
