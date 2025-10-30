@@ -81,7 +81,12 @@ def load_metadata(metadata_path: Path, root: Path) -> List[Path]:
         reader = csv.DictReader(fh)
         for row in reader:
             sample_rel = Path(row["sample_npz"])
-            sample_path = (root / sample_rel).resolve()
+            if sample_rel.is_absolute():
+                sample_path = sample_rel
+            elif sample_rel.parts and sample_rel.parts[0] == root.name:
+                sample_path = (root.parent / sample_rel).resolve()
+            else:
+                sample_path = (root / sample_rel).resolve()
             npz_paths.append(sample_path)
     if not npz_paths:
         raise SystemExit(f"No samples found via {metadata_path}.")
