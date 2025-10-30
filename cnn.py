@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-"""Minimal CNN training script for cell counting from NPZ samples."""
-
 from __future__ import annotations
 
 import argparse
