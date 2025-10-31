@@ -144,31 +144,21 @@ class CNN(nn.Module):
     def __init__(self) -> None:
         super().__init__()
         self.features = nn.Sequential(
-            nn.Conv2d(1, 64, kernel_size=3, padding=1),
+            nn.Conv2d(1, 8, kernel_size=3, padding=1),
             nn.ReLU(inplace=True),
             nn.MaxPool2d(2),
-            nn.Conv2d(64, 128, kernel_size=3, padding=1),
+            nn.Conv2d(8, 16, kernel_size=3, padding=1),
             nn.ReLU(inplace=True),
             nn.MaxPool2d(2),
-            nn.Conv2d(128, 256, kernel_size=3, padding=1),
+            nn.Conv2d(16, 16, kernel_size=3, padding=1),
             nn.ReLU(inplace=True),
             nn.AdaptiveAvgPool2d(1),
         )
-        # self.regressor = nn.Sequential(
-        #     nn.Flatten(),
-        #     nn.Linear(256, 64),
-        #     nn.ReLU(inplace=True),
-        #     nn.Linear(64, 1),
-        # )
         self.regressor = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(256, 256),
+            nn.Linear(16, 16),
             nn.ReLU(inplace=True),
-            nn.Linear(256, 128),
-            nn.ReLU(inplace=True),
-            nn.Linear(128, 64),
-            nn.ReLU(inplace=True),
-            nn.Linear(64, 1),
+            nn.Linear(16, 1),
         )
 
 
