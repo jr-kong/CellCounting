@@ -152,6 +152,7 @@ def main() -> None:
         hidden_layer_sizes=tuple(args.hidden_units),
         max_iter=args.max_iter,
         random_state=args.seed,
+        verbose=True
     )
     mlp.fit(X_train, y_train)
 

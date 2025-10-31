@@ -151,6 +151,7 @@ def main() -> None:
         n_estimators=args.n_estimators,
         max_depth=args.max_depth,
         random_state=args.seed,
+        verbose=True,
         n_jobs=-1,
     )
     rf.fit(X_train, y_train)
