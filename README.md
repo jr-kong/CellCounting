@@ -62,7 +62,25 @@
   - `--max-depth`: maximum tree depth (default `None`)
   - `--seed`: random seed (default `42`)
 
+**Train XGBoost**
+- Run: `python /content/CellCounting/xgb.py --run-name xgb_1`
+- Flags:
+  - `--metadata`: path to metadata CSV (default `processed/metadata.csv`)
+  - `--root`: root containing NPZ samples (default `processed`)
+  - `--experiment-root`: folder for XGB runs (default `experiments_xgb`)
+  - `--run-name`: optional run identifier
+  - `--val-split`: validation fraction (default `0.1`)
+  - `--test-split`: test fraction (default `0.1`)
+  - `--epochs`: boosting rounds / estimators (default `200`)
+  - `--learning-rate`: XGBoost `eta` value (default `0.1`)
+  - `--max-depth`: tree depth (default `6`)
+  - `--subsample`: row subsample ratio (default `0.8`)
+  - `--colsample-bytree`: column subsample ratio (default `0.8`)
+  - `--tree-method`: histogram algorithm (`gpu_hist` by default; use `hist` for CPU)
+  - `--seed`: random seed (default `42`)
+
 **Outputs**
 - Preprocessing writes `metadata.csv` plus per-sample NPZ files and logs in `processed/`
 - CNN training saves `config.json`, `metrics.csv`, optional `test_metrics.json`, `model.pt`, and `test_scatter.png` under each run folder
 - MLP and Random Forest runs save `config.json`, `metrics.csv`, and `model.joblib` in `experiments_mlp/` and `experiments_rf/`
+- XGBoost runs save `config.json`, `metrics.csv`, optional `test_metrics.json`, `model.json`, and `test_scatter.png` in `experiments_xgb/`
