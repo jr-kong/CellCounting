@@ -258,7 +258,7 @@ def main() -> None:
         X_train,
         y_train,
         eval_set=eval_set,
-        verbose=False,
+        verbose=True,
     )
 
     evals_result = model.evals_result()
