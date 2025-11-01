@@ -79,8 +79,24 @@
   - `--tree-method`: histogram algorithm (`gpu_hist` by default; use `hist` for CPU)
   - `--seed`: random seed (default `42`)
 
+**Train CNN (Regression + Tolerance Metrics)**
+- Run: `python /content/CellCounting/cnn_classification.py --run-name cnn_tol_1 --tolerance 2`
+- Flags:
+  - `--metadata`: path to metadata CSV (default `processed/metadata.csv`)
+  - `--root`: root containing NPZ samples (default `processed`)
+  - `--experiment-root`: folder for tolerance runs (default `experiments_cnn_cls`)
+  - `--run-name`: optional run identifier
+  - `--batch-size`: mini-batch size (default `4`)
+  - `--epochs`: number of epochs (default `10`)
+  - `--learning-rate`: Adam learning rate (default `1e-3`)
+  - `--val-split`: validation fraction (default `0.1`)
+  - `--test-split`: test fraction (default `0.1`)
+  - `--tolerance`: absolute error threshold to count a prediction as correct (default `2`)
+  - `--seed`: random seed (default `42`)
+
 **Outputs**
 - Preprocessing writes `metadata.csv` plus per-sample NPZ files and logs in `processed/`
 - CNN training saves `config.json`, `metrics.csv`, optional `test_metrics.json`, `model.pt`, and `test_scatter.png` under each run folder
+- CNN tolerance runs additionally log sensitivity, specificity, F1, ROC AUC, confusion matrix (`tolerance_confusion_matrix.png`), ROC curve (`tolerance_roc_curve.png`), and `test_regression_scatter.png`
 - MLP and Random Forest runs save `config.json`, `metrics.csv`, and `model.joblib` in `experiments_mlp/` and `experiments_rf/`
 - XGBoost runs save `config.json`, `metrics.csv`, optional `test_metrics.json`, `model.json`, and `test_scatter.png` in `experiments_xgb/`
